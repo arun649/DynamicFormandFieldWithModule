@@ -1,0 +1,30 @@
+﻿@model DemoOCR.Models.Module
+
+@{
+    ViewData["Title"] = "Module Details";
+}
+
+<h2>Module Details</h2>
+
+<div>
+    <h3>@Model.ModuleName</h3>
+    <p><strong>Description:</strong> @Model.Description</p>
+
+    <h4>Associated Forms:</h4>
+    @if (Model.Forms != null && Model.Forms.Count > 0)
+    {
+        <ul>
+            @foreach (var form in Model.Forms)
+            {
+                <li>@form.Title</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No forms associated with this module.</p>
+    }
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

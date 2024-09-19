@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DemoOCR.Models.FormField>
+
+@{
+    ViewData["Title"] = "Form Fields List";
+}
+
+<h2>Form Fields List</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Form</th>
+            <th>Field Name</th>
+            <th>Field Type</th>
+            <th>Label</th>
+            <th>Is Required</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var field in Model)
+        {
+            <tr>
+                <td>@field.Form?.Title</td>
+                <td>@field.FieldName</td>
+                <td>@field.FieldType</td>
+                <td>@field.Label</td>
+                <td>@field.IsRequired</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@field.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@field.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Create New Form Field</a>

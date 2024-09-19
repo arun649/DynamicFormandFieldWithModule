@@ -1,0 +1,42 @@
+﻿@model DemoOCR.Models.Form
+
+@{
+    ViewData["Title"] = "Edit Form";
+}
+
+<h2>Edit Form</h2>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FormName"></label>
+        <input asp-for="FormName" class="form-control" />
+        <span asp-validation-for="FormName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+ 
+    <div class="form-group">
+        <label asp-for="ModuleId" class="control-label">Module:</label>
+        <select asp-for="ModuleId" asp-items="ViewBag.Modules" class="form-control" id="ModuleId">
+            <option>--Select Module--</option>
+        </select>
+        <span asp-validation-for="ModuleId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

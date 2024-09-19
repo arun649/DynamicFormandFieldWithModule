@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DemoOCR.Models.Module>
+
+@{
+    ViewData["Title"] = "Modules List";
+}
+
+<h2>Modules List</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Module Name</th>
+            <th>Description</th>
+            <th>Forms</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var module in Model)
+        {
+            <tr>
+                <td>@module.ModuleName</td>
+                <td>@module.Description</td>
+                <td>
+                    @if (module.Forms != null && module.Forms.Count > 0)
+                    {
+                        <ul>
+                            @foreach (var form in module.Forms)
+                            {
+                                <li>@form.Title</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span>No forms associated</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@module.Id" class="btn btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@module.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@module.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Create New Module</a>

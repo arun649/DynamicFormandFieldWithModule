@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DemoOCR.Models.Form>
+
+@{
+    ViewData["Title"] = "Forms List";
+}
+
+<h2>Forms List</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Form Name</th>
+            <th>Description</th>
+            <th>Module</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="5" class="text-center">No forms available.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var form in Model)
+            {
+                <tr>
+                    <td>@form.Title</td>
+                    <td>@form.FormName</td>
+                    <td>@form.Description</td>
+                    <td>@form.Module?.ModuleName ?? "N/A"</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@form.Id" class="btn btn-info">Details</a>
+                        <a asp-action="Edit" asp-route-id="@form.Id" class="btn btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@form.Id" class="btn btn-danger">Delete</a>
+                        <a href="@Url.Action("RenderForm", "Form", new { formId = form.Id })" class="btn btn-primary">View</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Create New Form</a>

@@ -1,0 +1,36 @@
+﻿@model DemoOCR.Models.Form
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ModuleId">Module</label>
+        <select asp-for="ModuleId" class="form-control">
+            @foreach (var module in ViewBag.Modules as List<DemoOCR.Models.Module>)
+            {
+                <option value="@module.Id">@module.ModuleName</option>
+            }
+        </select>
+        <span asp-validation-for="ModuleId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FormName"></label>
+        <input asp-for="FormName" class="form-control" />
+        <span asp-validation-for="FormName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

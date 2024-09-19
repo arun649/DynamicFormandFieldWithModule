@@ -1,0 +1,46 @@
+﻿@model DemoOCR.Models.Form
+
+@{
+    ViewData["Title"] = Model.Title; // Use the Form Title as the page title
+}
+
+<h2>@Model.Title</h2>
+<p>@Model.Description</p>
+
+<!-- Display the form's module -->
+@if (Model.Module != null)
+{
+    <p><strong>Module:</strong> @Model.Module.ModuleName</p>
+}
+
+<!-- Start rendering the form dynamically -->
+<form method="post" action="@Url.Action("SubmitForm", "Forms")">
+    @foreach (var field in Model.FormFields)
+    {
+        <div class="form-group">
+            <label for="@field.FieldName">@field.Label</label>
+
+            <!-- Render input based on FieldType -->
+            @if (field.FieldType == "TextBox")
+            {
+                <input type="text" class="form-control" id="@field.FieldName" name="@field.FieldName" required="@field.IsRequired" />
+            }
+            else if (field.FieldType == "Dropdown")
+            {
+                <!-- Render a dropdown (this can be populated with actual values dynamically if needed) -->
+                <select class="form-control" id="@field.FieldName" name="@field.FieldName" required="@field.IsRequired">
+                    <option value="">Select @field.Label</option>
+                    <!-- Dynamically add options if needed -->
+                </select>
+            }
+            else if (field.FieldType == "Checkbox")
+            {
+                <!-- Render a checkbox -->
+                <input type="checkbox" class="form-check-input" id="@field.FieldName" name="@field.FieldName" required="@field.IsRequired" />
+                <label class="form-check-label" for="@field.FieldName">@field.Label</label>
+            }
+        </div>
+    }
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
